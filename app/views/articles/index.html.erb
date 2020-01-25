@@ -1,0 +1,30 @@
+<div class="contianer">
+    <div class="jumbotron">
+        <h2>New Article Form</h2>
+        <%=form_with url:articles_path do |f|%>
+            <div class="form-group">
+                <%=f.label :title%>
+                <%=f.text_field :title%>
+            </div>
+            <div class="form-group">
+                <%=f.label :text%>
+                <%=f.text_area :text%>
+            </div>
+            <div class="form-group">
+                <%=f.label :category%>
+                <%=f.text_field :category%>
+            </div>
+            <div class="form-group">
+                <%=f.submit%>
+            </div>
+        <%end%>
+        <%if flash[:new_category_errors]%>
+            <p class="text-danger"><%=flash[:new_category_errors]%></p>
+        <%end%>
+        <%if flash[:article_errors]%>
+            <%flash[:article_errors].each do |e|%>
+            <p class="text-danger"><%=e%></p>
+            <%end%>
+        <%end%>
+    </div>
+</div>

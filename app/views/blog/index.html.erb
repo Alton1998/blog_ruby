@@ -1,0 +1,44 @@
+<% content_for :title, "Blog | Home" %>
+<nav class="navbar navbar-light bg-light fixed-top">
+  <span class="navbar-brand mb-0 h1">My Blog</span>
+  <form class="form-inline" action="<%=logout_path%>" method="get">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+ <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">   
+                <%=link_to "Add Article",articles_path,class: 'btn btn-primary btn-lg'%>
+              </li>
+              <li class="nav-item">
+                <h6>Categories</h6>
+              </li>
+              <li class="nav-item">
+                <%=link_to "All",blog_index_path%>
+              </li>
+              <% if @categories %>
+                <%@categories.each do |category|%>
+                  <li class="nav-item">
+                    <%=link_to "#{category.name}",category_id_path(id:category.id)%>
+                  </li>
+                <%end%>
+              <%end%>
+            </ul>
+            </div>
+          </nav>
+        </div>
+         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-6" style="margin-top:5%">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+         <h1 class="h2">Articles</h1>
+         </div>
+         <% if @articles%>
+          <%@articles.each do |article|%>
+          <h2><%=article.id%>.<%=link_to "#{article.title}",article_id_path(id:article.id)%> by <%=User.find_by(id:article.user_id).name%></h2>
+          <%end%>
+         <%end%>
+         </main>
+        <div>
+    </div>
